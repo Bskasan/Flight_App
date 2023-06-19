@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Modules:
     'rest_framework',
+    'drf_yasg',
+    "debug_toolbar",
     # Apps;
     'flight',
 ]
