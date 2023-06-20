@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # Modules:
     'rest_framework',
     'drf_yasg',
-    "debug_toolbar",
+    
 
     # Apps;
     'flight',
@@ -58,8 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # Extras;
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    
 ]
 
 ROOT_URLCONF = 'core.urls'
