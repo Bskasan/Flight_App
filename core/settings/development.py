@@ -48,6 +48,7 @@ INTERNAL_IPS = [
 
 
 # User Tracking -> LOG
+# https://docs.djangoproject.com/en/4.2/topics/logging/
 LOGGING = { 
     "version": 1, 
     # is set to True then all loggers from the default configuration will be disabled. 
@@ -55,7 +56,7 @@ LOGGING = {
     # Formatters describe the exact format of that text of a log record.  
     "formatters": { 
         "standard": { 
-            "format": "[%(levelname)s] %(asctime)s %(name)s: %(message)s" 
+            "format": "RoninDevEnv --- [%(levelname)s] %(asctime)s %(name)s: %(message)s" 
         }, 
         'verbose': { 
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}', 
