@@ -13,3 +13,25 @@ MIDDLEWARE = [
     # Extras;
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# Password validation
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# No need for validation in the development process.
+
+AUTH_PASSWORD_VALIDATORS = []
+
+#! Debug Toolbar;
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
