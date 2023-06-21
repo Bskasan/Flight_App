@@ -6,12 +6,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS += [
-    "debug_toolbar",
+    'debug_toolbar',
 ]
 
 MIDDLEWARE += [
-    # Extras;
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 # Database
@@ -26,14 +25,14 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-# No need for validation in the development process.
 
 AUTH_PASSWORD_VALIDATORS = []
 
-#! Debug Toolbar;
-
+# Debug Toolbar
 INTERNAL_IPS = [
+    # ...
     "127.0.0.1",
+    # ...
 ]
 
 # LOGGING
@@ -45,10 +44,6 @@ INTERNAL_IPS = [
     ERROR: Büyük çaplı hataların bilgisi
     CRITICAL: Kritik hatalların bilgisi
 '''
-
-
-# User Tracking -> LOG
-# https://docs.djangoproject.com/en/4.2/topics/logging/
 LOGGING = { 
     "version": 1, 
     # is set to True then all loggers from the default configuration will be disabled. 
@@ -56,7 +51,7 @@ LOGGING = {
     # Formatters describe the exact format of that text of a log record.  
     "formatters": { 
         "standard": { 
-            "format": "RoninDevEnv --- [%(levelname)s] %(asctime)s %(name)s: %(message)s" 
+            "format": "[%(levelname)s] %(asctime)s %(name)s: %(message)s" 
         }, 
         'verbose': { 
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}', 
