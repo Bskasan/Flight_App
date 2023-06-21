@@ -60,4 +60,7 @@
 - Drf_yasg
 - Django psycopg
 
+## Uninstall Requirements.txt
+- pip uninstall -r requirements.txt
+
 
