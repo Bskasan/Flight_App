@@ -5,6 +5,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = [
+            # Don't show them on admin panel
             # "password",
             "last_login",
             "date_joined",

@@ -63,4 +63,8 @@
 ## Uninstall Requirements.txt
 - pip uninstall -r requirements.txt
 
+## For Login and Logout - dj-rest-auth module
+https://dj-rest-auth.readthedocs.io/en/latest/index.html
+
+
 
