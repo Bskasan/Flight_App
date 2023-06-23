@@ -65,4 +65,8 @@ class Flight(models.Model):
 class Reservation(models.Model):
 
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
-    
+    passenger = models.ManyToManyField(Passenger)
+
+    created = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
