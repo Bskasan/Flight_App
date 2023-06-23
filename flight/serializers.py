@@ -7,12 +7,18 @@ from .models import (
 
 # -------------------- FIXED SERIALIZER ------------------- #
 
-class PassengerSerializer(serializers.ModelSerializer):
-    pass
+class FixedSerializer(serializers.ModelSerializer):
+    created = serializers.StringRelatedField()
+    created_id = serializers.IntegerField(required=False)
+
+    def create(self, validated_data):
+        # User that signed in to the system.
+        validated_data['created_id'] = self.context['request'].user.id
+        return super().create(validated_data)
 
 # -------------------- PASSENGER SERIALIZER ------------------- #
 
-class PassengerSerializer(serializers.ModelSerializer):
+class PassengerSerializer(FixedSerializer):
 
     class Meta:
         model = Passenger
@@ -20,7 +26,7 @@ class PassengerSerializer(serializers.ModelSerializer):
 
 # --------------------- FLIGHT SERIALIZER --------------------- #
 
-class FlightSerializer(serializers.ModelSerializer):
+class FlightSerializer(FixedSerializer):
 
     class Meta:
         model = Flight
@@ -28,7 +34,7 @@ class FlightSerializer(serializers.ModelSerializer):
 
 # ------------------ RESERVATION SERIALIZER ------------------- #
 
-class ReservationSerializer(serializers.ModelSerializer):
+class ReservationSerializer(FixedSerializer):
 
     class Meta:
         model = Reservation
