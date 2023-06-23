@@ -49,3 +49,20 @@ class Flight(models.Model):
 
     flight_number = models.CharField(max_length=64)
     airline = models.CharField(max_length=3, choices=AIRLINES, default='THY')
+    departure = models.PositiveSmallIntegerField(choices=CITIES)
+    departure_date = models.DateField()
+    arrival = models.PositiveIntegerField(choices=CITIES)
+    arrival_date = models.DateField()
+    created = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+
+
+# ----------------------------------------------------- #
+# ------------------ RESERVATION ---------------------- #
+# ----------------------------------------------------- #
+
+class Reservation(models.Model):
+
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
+    
