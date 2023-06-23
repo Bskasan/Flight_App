@@ -3,9 +3,20 @@ from django.contrib.auth.models import User
 
 
 # ----------------------------------------------------- #
+# -------------------- FIX MODEL ---------------------- #
+# ----------------------------------------------------- #
+
+class FixedModel(models.Model):
+    created = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+
+
+
+# ----------------------------------------------------- #
 # -------------------- PASSENGER ---------------------- #
 # ----------------------------------------------------- #
-class Passenger(models.Model):
+class Passenger(FixedModel):
 
     GENDERS = (
         ('F', 'Female'),
@@ -17,15 +28,15 @@ class Passenger(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     gender = models.CharField(max_length=1, choices=GENDERS, default='P')
-    created = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_time = models.DateTimeField(auto_now_add=True)
-    updated_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 
 # ----------------------------------------------------- #
 # -------------------   FLIGHT   ---------------------- #
 # ----------------------------------------------------- #
-class Flight(models.Model):
+class Flight(FixedModel):
 
     AIRLINES = (
         ('THY', 'Turkish Airlines'),
@@ -57,12 +68,15 @@ class Flight(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.flight_number} # {self.airline} # {self.departure} => {self.arrival}'
+
 
 # ----------------------------------------------------- #
 # ------------------ RESERVATION ---------------------- #
 # ----------------------------------------------------- #
 
-class Reservation(models.Model):
+class Reservation(FixedModel):
 
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
     passenger = models.ManyToManyField(Passenger)
