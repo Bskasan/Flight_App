@@ -1,15 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
+# Models are tables in Django at the same time.
 # ----------------------------------------------------- #
 # -------------------- FIX MODEL ---------------------- #
 # ----------------------------------------------------- #
-
+# To collect common areas.
 class FixedModel(models.Model):
     created = models.ForeignKey(User, on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    # Don't change this model to table by changing meta/abstract.
+    class Meta:
+        abstract = True
 
 
 
