@@ -20,9 +20,14 @@ class FixedSerializer(serializers.ModelSerializer):
 
 class PassengerSerializer(FixedSerializer):
 
+    gender_text = serializers.SerializerMethodField()
+
     class Meta:
         model = Passenger
         exclude = []
+    
+    def get_gender_text(self, object):
+        return object.get_gender_display()
 
 # --------------------- FLIGHT SERIALIZER --------------------- #
 
@@ -34,7 +39,22 @@ class FlightSerializer(FixedSerializer):
 
     class Meta:
         model = Flight
-        exclude = []
+        fields = (
+            "id",
+            "created",
+            "created_id",
+            "departure_city",
+            "arrival_city",
+            "created_time",
+            "updated_time",
+            "flight_number",
+            "airline",
+            "departure",
+            "departure_date",
+            "arrival",
+            "arrival_date",
+            "get_airline_display", # dont need SerializerMethodField.
+        )
 
     def get_departure_city(self, obj):
         return obj.get_departure_display() # To show the departure value.
@@ -45,6 +65,20 @@ class FlightSerializer(FixedSerializer):
 # ------------------ RESERVATION SERIALIZER ------------------- #
 
 class ReservationSerializer(FixedSerializer):
+
+    # Two Method
+    # only __str__() method.
+    # fligth = serializers.StringRelatedField()
+    # ------------------------------------------
+
+
+    # complete data
+    flight = FlightSerializer() # ForeignKey 
+    # ------------------------------------------
+    # flight_id = serializers.IntegerField()
+
+    # To see our passenger's details.
+    passenger = PassengerSerializer(many=True) # ManyToMany()
 
     class Meta:
         model = Reservation
