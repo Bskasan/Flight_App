@@ -28,9 +28,19 @@ class PassengerSerializer(FixedSerializer):
 
 class FlightSerializer(FixedSerializer):
 
+    # Normally we can write directly the arrival or departure, but we wanted to see how the source code works and manipulate.
+    departure_city = serializers.SerializerMethodField() # return from get_field_name()
+    arrival_city = serializers.SerializerMethodField()
+
     class Meta:
         model = Flight
         exclude = []
+
+    def get_departure_city(self, obj):
+        return obj.get_departure_display() # To show the departure value.
+    
+    def get_arrival_city(self, obj):
+        return obj.get_arrival_display() # Obj comes automatically.
 
 # ------------------ RESERVATION SERIALIZER ------------------- #
 
