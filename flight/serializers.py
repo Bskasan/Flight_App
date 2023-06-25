@@ -73,13 +73,17 @@ class ReservationSerializer(FixedSerializer):
 
 
     # complete data
-    flight = FlightSerializer() # ForeignKey 
+    flight = FlightSerializer(read_only=True) # ForeignKey 
     # ------------------------------------------
-    # flight_id = serializers.IntegerField()
+    flight_id = serializers.IntegerField(write_only=True)
 
     # To see our passenger's details.
-    passenger = PassengerSerializer(many=True) # ManyToMany()
+    passenger = PassengerSerializer(many=True, read_only=True) # ManyToMany()
 
     class Meta:
         model = Reservation
         exclude = []
+
+    def create(self, validated_data):
+        validated_data["passenger"] = validated_data.pop('passenger_ids')
+        return super().create(validated_data)
